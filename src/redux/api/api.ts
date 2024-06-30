@@ -7,10 +7,19 @@ export const baseApi = createApi({
   tagTypes: ["todo"],
   endpoints: (builder) => ({
     getTodos: builder.query({
-      query: () => ({
-        url: "/tasks",
-        method: "GET",
-      }),
+      query: (priority) => {
+        const params = new URLSearchParams();
+
+        if (priority) {
+          params.append("priority", priority);
+        }
+        return {
+          url: "/tasks",
+          method: "GET",
+          // params: { priority },  // unprofetional
+          params: params, // profetional
+        };
+      },
       // providerTags er karone todo cash e getTodos er query maddome all data cash hobe
       providesTags: ["todo"],
     }),
@@ -26,7 +35,35 @@ export const baseApi = createApi({
       // invalidatesTags er karone todo theke all cas remove hoye jabe. tai abar sathe sathe getTodos providesTags er maddome abar todo cash add korbe. fole reload sara data add korle data sob fetch korbe.
       invalidatesTags: ["todo"],
     }),
+
+    updateTodo: builder.mutation({
+      query: (options) => {
+        console.log("opstions", options);
+        return {
+          url: `/task/${options.id}`,
+          method: "PUT",
+          body: options.data,
+        };
+      },
+      invalidatesTags: ["todo"],
+    }),
+
+    deleteTodo: builder.mutation({
+      query: (id) => {
+        console.log(id);
+        return {
+          url: `/task/${id.id}`,
+          method: "DELETE",
+        };
+      },
+      invalidatesTags: ["todo"],
+    }),
   }),
 });
 
-export const { useGetTodosQuery, useAddTodoMutation } = baseApi;
+export const {
+  useGetTodosQuery,
+  useAddTodoMutation,
+  useUpdateTodoMutation,
+  useDeleteTodoMutation,
+} = baseApi;

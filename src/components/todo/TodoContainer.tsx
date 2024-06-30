@@ -1,19 +1,23 @@
+import { useState } from "react";
 import AddTodoModal from "./AddTodoModal";
 import TodoCard from "./TodoCard";
 import TodoFilter from "./TodoFilter";
-import { useGetTodosQuery } from "@/redux/api/api";
+import { useDeleteTodoMutation, useGetTodosQuery } from "@/redux/api/api";
 
 const TodoContainer = () => {
   //* From Local State
   // const { todos } = useAppSelector((state) => state.todos);
+  const [priority, setPriority] = useState("");
+  console.log(priority);
 
   //* From server
-  const {
-    data: todos,
-    isLoading,
-  } = useGetTodosQuery(undefined, /**{ pollingInterval: 1000 } */ ); // aivabe pollingInterval use korar karone pore 1000ms por por data fetch korbe. jeta web crush korbe. tai amora aivabe use korbo nah. api file e use korbo.
+  const { data: todos, isLoading } = useGetTodosQuery(
+    priority /**{ pollingInterval: 1000 } */
+  ); // aivabe pollingInterval use korar karone pore 1000ms por por data fetch korbe. jeta web crush korbe. tai amora aivabe use korbo nah. api file e use korbo.
 
-  console.log(todos);
+  // const [deleteTodo] = useDeleteTodoMutation();
+  // deleteTodo()
+
   if (isLoading) {
     return <p>Loading ...</p>;
   }
@@ -22,7 +26,7 @@ const TodoContainer = () => {
     <div>
       <div className="flex justify-between mb-5">
         <AddTodoModal />
-        <TodoFilter />
+        <TodoFilter priority={priority} setPriority={setPriority} />
       </div>
 
       <div className="bg-primary-gradient w-full h-full rounded-xl p-[5px]">

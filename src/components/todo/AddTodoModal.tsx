@@ -51,7 +51,7 @@ const AddTodoModal = () => {
       priority,
       idCompleted: false,
     };
-    console.log('inside model', taskDetails);
+    console.log("inside model", taskDetails);
 
     //! For Loacl State management
     // dispatch(addTodo(taskDetails));
