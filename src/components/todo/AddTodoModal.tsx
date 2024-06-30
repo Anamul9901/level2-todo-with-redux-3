@@ -37,7 +37,7 @@ const AddTodoModal = () => {
   const [addTodo, { data, isLoading, isError, isSuccess }] =
     useAddTodoMutation();
 
-  console.log({ data, isLoading, isSuccess, isError });
+  // console.log({ data, isLoading, isSuccess, isError });
 
   const onSubmit = (e: FormEvent) => {
     e.preventDefault();
@@ -51,7 +51,7 @@ const AddTodoModal = () => {
       priority,
       idCompleted: false,
     };
-    console.log("inside model", taskDetails);
+    // console.log("inside model", taskDetails);
 
     //! For Loacl State management
     // dispatch(addTodo(taskDetails));

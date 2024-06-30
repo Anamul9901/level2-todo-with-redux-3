@@ -44,7 +44,7 @@ const TodoCard = ({
     };
 
     deleteTodo(deleteTodoData);
-    console.log(deleteTodoData);
+    // console.log(deleteTodoData);
   };
 
   return (

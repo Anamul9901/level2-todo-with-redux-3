@@ -25,7 +25,7 @@ export const baseApi = createApi({
     }),
     addTodo: builder.mutation({
       query: (data) => {
-        console.log("inside base api: ", data);
+        // console.log("inside base api: ", data);
         return {
           url: "/task",
           method: "POST",
@@ -38,7 +38,7 @@ export const baseApi = createApi({
 
     updateTodo: builder.mutation({
       query: (options) => {
-        console.log("opstions", options);
+        // console.log("opstions", options);
         return {
           url: `/task/${options.id}`,
           method: "PUT",
@@ -50,7 +50,7 @@ export const baseApi = createApi({
 
     deleteTodo: builder.mutation({
       query: (id) => {
-        console.log(id);
+        // console.log(id);
         return {
           url: `/task/${id.id}`,
           method: "DELETE",

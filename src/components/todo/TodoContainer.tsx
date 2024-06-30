@@ -8,7 +8,7 @@ const TodoContainer = () => {
   //* From Local State
   // const { todos } = useAppSelector((state) => state.todos);
   const [priority, setPriority] = useState("");
-  console.log(priority);
+  // console.log(priority);
 
   //* From server
   const { data: todos, isLoading } = useGetTodosQuery(
